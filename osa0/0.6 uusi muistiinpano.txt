@@ -1,0 +1,9 @@
+browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa (sisältää uuden muistiinpanon)
+activate server
+server-->>browser: HTTP 201 Created (vahvistus luodusta muistiinpanosta)
+deactivate server
+
+browser->>server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json (päivittää muistiinpanot)
+activate server
+server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }] (data json muodossa, joka sisältää uuden muistiinpanon)
+deactivate server

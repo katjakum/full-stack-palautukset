@@ -1,28 +1,41 @@
 import { useState } from "react";
 
-const Statistics = (props) => {
-  console.log(props);
-  if (props.total === 0) {
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>{text}</button>
+);
+
+const StatisticLine = ({ text, value }) => (
+  <div>
+    {text} {value}
+  </div>
+);
+
+const Statistics = ({
+  good,
+  neutral,
+  bad,
+  total,
+  average,
+  positiveFeedback,
+}) => {
+  if (total === 0) {
     return (
       <div>
-        <p>
-          no feedback given
-        </p>
+        <p>no feedback given</p>
       </div>
-    )
-  } 
-    return (
-    <div>
-      <p>
-        good {props.good} <br />
-        neutral {props.neutral} <br />
-        bad {props.bad} <br />
-        all {props.total} <br/>
-        average {props.average} <br />
-        positive {props.positiveFeedback} %
-      </p>
-    </div>
     );
+  } else {
+    return (
+      <div>
+        <StatisticLine text="good" value={good} />
+        <StatisticLine text="neutral" value={neutral} />
+        <StatisticLine text="bad" value={bad} />
+        <StatisticLine text="all" value={total} />
+        <StatisticLine text="average" value={average} />
+        <StatisticLine text="positive" value={`${positiveFeedback}%`} />
+      </div>
+    );
+  }
 };
 
 const App = () => {
@@ -50,20 +63,24 @@ const App = () => {
   };
 
   const average = total === 0 ? 0 : (good - bad) / total;
+  const positiveFeedback = total === 0 ? 0 : (good / total) * 100;
 
-  const positiveFeedback =
-    total === 0 ? 0 : (good / (good + bad + neutral)) * 100;
- 
   return (
     <div>
       <div>
         <h1>give feedback</h1>
-        <button onClick={handleGoodClick}>good</button>
-        <button onClick={handleNeutralClick}>neutral</button>
-        <button onClick={handleBadClick}>bad</button>
+        <Button handleClick={handleGoodClick} text="good" />
+        <Button handleClick={handleNeutralClick} text="neutral" />
+        <Button handleClick={handleBadClick} text="bad" />
         <h2>statistics</h2>
-        <Statistics good={good} neutral={neutral} bad={bad} total={total} average={average.toFixed(3)} positiveFeedback={positiveFeedback.toFixed(3)} />
-
+        <Statistics
+          good={good}
+          neutral={neutral}
+          bad={bad}
+          total={total}
+          average={average.toFixed(3)}
+          positiveFeedback={positiveFeedback.toFixed(3)}
+        />
       </div>
     </div>
   );

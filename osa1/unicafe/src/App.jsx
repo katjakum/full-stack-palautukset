@@ -5,9 +5,10 @@ const Button = ({ handleClick, text }) => (
 );
 
 const StatisticLine = ({ text, value }) => (
-  <div>
-    {text} {value}
-  </div>
+    <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
 );
 
 const Statistics = ({
@@ -78,8 +79,8 @@ const App = () => {
           neutral={neutral}
           bad={bad}
           total={total}
-          average={average.toFixed(3)}
-          positiveFeedback={positiveFeedback.toFixed(3)}
+          average={average.toFixed(2)}
+          positiveFeedback={positiveFeedback.toFixed(2)}
         />
       </div>
     </div>

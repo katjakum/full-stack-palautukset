@@ -18,11 +18,18 @@ const App = () => {
     const nextIndex = (selected + 1) % anecdotes.length;
     setSelected(nextIndex)
   }
-  
 
+  const voting = () => {
+    length = anecdotes.length
+    let a = Array(length).fill(1)
+    console.log(a);
+
+  }
+  
   return (
     <div>
       {anecdotes[selected]} <br/>
+      <button onClick={voting}>vote</button>
       <button onClick={changeAnecdote}>next anecdote</button>
     </div>
   )
